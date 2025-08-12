@@ -11,7 +11,7 @@ console.log('DATABASE_URL loaded:', process.env.DATABASE_URL ? 'YES' : 'NO');
 console.log('DATABASE_URL starts with:', process.env.DATABASE_URL?.substring(0, 20));
 
 const app = express();
-const port = process.env.PORT || 8888;
+const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
