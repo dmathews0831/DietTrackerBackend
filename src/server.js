@@ -43,6 +43,14 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/app', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'Diet Tracker API is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.get('/health', (req, res) => {
     res.json({
         status: 'OK',
@@ -161,4 +169,5 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${port}`);
 
 });
+
 
