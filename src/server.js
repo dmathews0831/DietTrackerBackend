@@ -1,20 +1,39 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+
+console.log('Starting application...');
+dotenv.config();
+console.log('Environment loaded');
+
 import { db } from './db/index.js';
 import { dietLogs } from './db/schema.js';
 import { eq, desc } from 'drizzle-orm';
 
-dotenv.config();
-
-console.log('DATABASE_URL loaded:', process.env.DATABASE_URL ? 'YES' : 'NO');
-console.log('DATABASE_URL starts with:', process.env.DATABASE_URL?.substring(0, 20));
+console.log('Imports completed');
 
 const app = express();
 const port = process.env.PORT || 8080;
 
+console.log('Express app created, port:', port);
+
+// Middleware
 app.use(cors());
 app.use(express.json());
+console.log('Middleware configured');
+
+// Test database connection on startup
+console.log('Testing database connection...');
+try {
+  // Don't await here, just log that we're trying
+  db.select().from(dietLogs).limit(1).then(() => {
+    console.log('Database connection successful');
+  }).catch(err => {
+    console.log('Database connection failed:', err.message);
+  });
+} catch (err) {
+  console.log('Database setup error:', err.message);
+}
 
 app.get('/', (req, res) => {
   res.json({ 
@@ -142,3 +161,4 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${port}`);
 
 });
+
