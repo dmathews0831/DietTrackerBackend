@@ -51,6 +51,11 @@ app.get('/app', (req, res) => {
   });
 });
 
+app.get('/ping', (req, res) => {
+  console.log('Ping route hit at:', new Date().toISOString());
+  res.send('pong');
+});
+
 app.get('/health', (req, res) => {
     res.json({
         status: 'OK',
@@ -169,5 +174,6 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${port}`);
 
 });
+
 
 
