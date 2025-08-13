@@ -16,6 +16,14 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'Diet Tracker API is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.get('/health', (req, res) => {
     res.json({
         status: 'OK',
@@ -132,4 +140,5 @@ app.delete('/api/diet-logs/:id', async (req, res) => {
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${port}`);
+
 });
